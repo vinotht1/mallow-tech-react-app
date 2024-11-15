@@ -1,5 +1,6 @@
 const routeLinks = {
     signin: "/",
+    dashboard:"/dashboard"
 }
 
 export const routesConstant = {

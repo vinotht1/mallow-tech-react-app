@@ -47,7 +47,6 @@ export const signInPost = createAsyncThunk<
   { rejectValue: SigninError }
 >("signin/signInPost", async (data, { rejectWithValue }) => {
   const response = await SigninApi(data);
-  console.log("response",response)
   if ("error" in response && response.error) {
     console.log("response.error", response);
     return rejectWithValue({
@@ -56,6 +55,7 @@ export const signInPost = createAsyncThunk<
       statusCode: response.statusCode,
     });
   }
+  console.log("response",response)
 
   return response as SigninResponse;
 });

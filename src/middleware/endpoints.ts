@@ -8,4 +8,5 @@ export const httpEndpoints = {
 
 export const endpoints = {
   signin: "login",
+  userList:"users"
 };

@@ -24,7 +24,7 @@ export default function AppRoutes() {
               />
             );
           })}
-          <Route element={<div>Container</div>}>
+          <Route>
             {PrivateRoutesPath.map((item, index) => {
               return (
                 <Route
