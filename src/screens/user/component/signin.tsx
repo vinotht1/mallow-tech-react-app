@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Input, Button, Checkbox } from "antd";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
@@ -23,6 +24,13 @@ export default function Signin() {
     remember: false,
   };
 
+  useEffect(() => {
+    const userSession = sessionStorage.getItem("accessToken");
+    if (userSession) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email format")
@@ -33,7 +41,7 @@ export default function Signin() {
       .required("Password is required")
       .min(8, "Password must be at least 8 characters long")
       .max(20, "Password can't exceed 20 characters")
-      .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+      .matches(/[a-z]/, "Password must contain at least one lowercase letter"),
   });
 
   const handleSubmit = async (
@@ -44,13 +52,16 @@ export default function Signin() {
       const response = await dispatch(
         signInPost({ email: values.email, password: values.password })
       ).unwrap();
-  
+
+      // Save the user session to sessionStorage
+      sessionStorage.setItem("user", JSON.stringify(response));
+
       console.log("Login successful:", response);
       navigate("/dashboard");
     } catch (error) {
       console.error("Login failed:", error);
     } finally {
-      setSubmitting(false); 
+      setSubmitting(false);
       resetForm();
     }
   };
@@ -65,7 +76,7 @@ export default function Signin() {
         >
           {({ values, handleChange, handleBlur, isSubmitting }) => (
             <Form className="signin-form">
-              <h2 style={{paddingBottom:"15px"}}>Signin</h2>
+              <h2 style={{ paddingBottom: "15px" }}>Signin</h2>
 
               <div className="input-group">
                 <Field name="email">

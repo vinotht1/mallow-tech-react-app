@@ -8,10 +8,10 @@ import {
   Alert,
   Card,
   Radio,
-  Space,
 } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
+import { useNavigate } from "react-router-dom";
 import { fetchUsers } from "../slice";
 import {
   createUserApi,
@@ -39,6 +39,8 @@ const UsersPage = () => {
   const [filteredUsers, setFilteredUsers] = useState<any[]>([]);
 
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
   const {
     data: users,
     isLoading,
@@ -59,10 +61,15 @@ const UsersPage = () => {
   }));
 
   useEffect(() => {
-    if (pagination?.page) {
-      dispatch(fetchUsers({ page: pagination.page }));
+    const userSession = sessionStorage.getItem("accessToken");
+    if (!userSession) {
+      navigate("/signin"); 
+    } else {
+      if (pagination?.page) {
+        dispatch(fetchUsers({ page: pagination.page }));
+      }
     }
-  }, [dispatch, pagination?.page]);
+  }, [dispatch, navigate, pagination?.page]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -204,9 +211,9 @@ const UsersPage = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           enterButton
         />
-          <Button type="primary" onClick={handleCreateUser} className="create-user-button">
-            Create User
-          </Button>
+        <Button type="primary" onClick={handleCreateUser} className="create-user-button">
+          Create User
+        </Button>
       </div>
       <div className="table-card-toggle">
         <Radio.Group value={viewMode} onChange={handleViewChange}>
@@ -226,7 +233,6 @@ const UsersPage = () => {
       {isLoading ? (
         <Spin size="large" />
       ) : viewMode === "table" ? (
-        <div className="user-list">
         <Table
           dataSource={filteredUsers}
           columns={columns}
@@ -238,7 +244,6 @@ const UsersPage = () => {
             onChange: (page) => dispatch(fetchUsers({ page })),
           }}
         />
-        </div>
       ) : (
         <div
           style={{
