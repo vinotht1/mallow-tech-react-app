@@ -1,17 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Modal, Input, Button } from "antd";
 import { useFormik } from "formik";
-import * as Yup from "yup"; 
+import * as Yup from "yup";
 
 interface UserModalProps {
   visible: boolean;
   onCancel: () => void;
   onSubmit: (values: UserFormValues) => void;
   initialValues: UserFormValues;
-  title: string;
+  title: string; 
 }
 
 export interface UserFormValues {
+  id?: number; 
   firstName: string;
   lastName: string;
   email: string;
@@ -39,19 +40,19 @@ const UserModal: React.FC<UserModalProps> = ({
   const formik = useFormik<UserFormValues>({
     initialValues,
     validationSchema,
-    enableReinitialize: true,
+    enableReinitialize: true, 
     onSubmit: (values) => {
       onSubmit(values);
-      formik.resetForm();
+      formik.resetForm(); 
     },
   });
 
   return (
     <Modal
-      title={title}
+      title={title} 
       visible={visible}
       onCancel={() => {
-        formik.resetForm();
+        formik.resetForm(); 
         onCancel();
       }}
       footer={null}
@@ -113,9 +114,9 @@ const UserModal: React.FC<UserModalProps> = ({
           )}
         </div>
 
-        <div>
+        <div className="model-btn-section">
           <Button type="primary" htmlType="submit" style={{ marginRight: 8 }}>
-            Submit
+            {title.includes("Edit") ? "Update" : "Create"}
           </Button>
           <Button onClick={onCancel}>Cancel</Button>
         </div>

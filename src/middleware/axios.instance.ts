@@ -10,6 +10,7 @@ const instance = axios.create({
     Authorization: `Bearer ${import.meta.env.VITE_AUTHORIZATION_KEY}`,
   },
 });
+
 const APIREQUEST = {
   post: async (url = "", data = {}) => {
     async function apiCall() {
@@ -33,5 +34,28 @@ const APIREQUEST = {
     const getData = await apiCall();
     return getData?.data;
   },
+  put: async (url = "", data = {}) => {
+    async function apiCall() {
+      return instance({
+        method: "PUT",
+        url: url,
+        data: data,
+      });
+    }
+    const putData = await apiCall();
+    return putData?.data;
+  },
+  delete: async (url = "", params = {}) => {
+    async function apiCall() {
+      return instance({
+        method: "DELETE",
+        url: url,
+        params: params,
+      });
+    }
+    const deleteData = await apiCall();
+    return deleteData?.data;
+  },
 };
+
 export default APIREQUEST;

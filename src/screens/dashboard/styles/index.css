@@ -1,0 +1,50 @@
+.action-btn-section {
+    display: flex;
+}
+
+.user-container {
+    display: flex;
+    flex-direction: column;
+    padding: 58px;
+    margin: 0px 150px 50px 150px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width:
+        100%;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    margin-right: 10px;
+}
+
+.table-card-toggle {
+    display: flex;
+    margin-bottom: 20px;
+    padding-top: 20px;
+}
+
+.table-card-toggle button {
+    margin-right: 10px;
+}
+
+.pagination {
+    margin-top: 20px;
+}
+
+.ant-input-search-with-button {
+    padding-right: 25px;
+}
+
+.model-btn-section {
+    display: flex;
+}

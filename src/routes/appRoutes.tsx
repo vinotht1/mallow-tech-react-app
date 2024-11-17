@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PrivateRoutesPath, PublicRoutesPath } from "../constants";
-import React, { Suspense, } from "react";
+import React, { Suspense } from "react";
 
 export default function AppRoutes() {
   return (
@@ -15,7 +15,9 @@ export default function AppRoutes() {
                 element={
                   <Suspense
                     fallback={
-                      <div className="global-loader">Global Loading</div>
+                      <div className="loader-container">
+                        <div className="loader"></div>
+                      </div>
                     }
                   >
                     {<item.element />}
@@ -32,9 +34,11 @@ export default function AppRoutes() {
                   key={index}
                   element={
                     <Suspense
-                      fallback={
-                        <div className="global-loader">Global Loading</div>
-                      }
+                    fallback={
+                      <div className="loader-container">
+                        <div className="loader"></div>
+                      </div>
+                    }
                     >
                       {<item.element />}
                     </Suspense>

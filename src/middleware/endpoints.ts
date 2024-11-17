@@ -8,5 +8,8 @@ export const httpEndpoints = {
 
 export const endpoints = {
   signin: "login",
-  userList:"users"
+  userList: "users",
+  createUser: "users",
+  updateUser: "users",
+  deleteUser: "users",
 };

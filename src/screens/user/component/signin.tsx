@@ -65,7 +65,7 @@ export default function Signin() {
         >
           {({ values, handleChange, handleBlur, isSubmitting }) => (
             <Form className="signin-form">
-              <h2>Signin</h2>
+              <h2 style={{paddingBottom:"15px"}}>Signin</h2>
 
               <div className="input-group">
                 <Field name="email">
