@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Input, Button, Checkbox } from "antd";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
