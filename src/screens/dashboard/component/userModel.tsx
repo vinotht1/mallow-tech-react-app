@@ -50,7 +50,7 @@ const UserModal: React.FC<UserModalProps> = ({
   return (
     <Modal
       title={title} 
-      visible={visible}
+      open={visible}
       onCancel={() => {
         formik.resetForm(); 
         onCancel();
