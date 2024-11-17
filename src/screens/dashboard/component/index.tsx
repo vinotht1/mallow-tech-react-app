@@ -63,7 +63,7 @@ const UsersPage = () => {
   useEffect(() => {
     const userSession = sessionStorage.getItem("accessToken");
     if (!userSession) {
-      navigate("/signin"); 
+      navigate("/"); 
     } else {
       if (pagination?.page) {
         dispatch(fetchUsers({ page: pagination.page }));
